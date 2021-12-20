@@ -1,0 +1,68 @@
+import calendar
+from datetime  import date
+import re
+
+u1 = 'harshith'
+p1 = 'harshi@1999'
+y = date.today().year
+m = date.today().month
+a = date.today()
+
+
+date = a.day.__str__().rjust(2)
+rday = ('\\b' + date + '\\b').replace('\\b ', '\\s')
+rdayc = "\033[7m" + date + "\033[0m"
+thism = calendar.month(y,m)
+print(re.sub(rday,rdayc,thism))
+username = input('Enter the username for log in into Calendar: ')
+password = input('Enter your Password:')
+
+if username==u1 and password==p1:
+    y = a.year
+    m = a.month
+    month = int(input('Enter the month in the range from -12 to 12: '))
+
+    if month == 0:
+        date = a.day.__str__().rjust(2)
+        rday = ('\\b' + date + '\\b').replace('\\b ', '\\s')
+        rdayc = "\033[7m" + date + "\033[0m"
+        thism = calendar.month(y, m)
+        print(re.sub(rday, rdayc, thism))
+
+    elif month > 12 or month < -12:
+        print('Invalid month')
+
+    elif m + month == 12:
+        m1 = m + month
+
+    elif (month + m) < 12 and (month + m >= 1):
+        m1 = m + month
+
+    elif m + month > 12:
+        m1 = m + month - 12
+        y +=1
+    elif (m + month) < 0:
+        m1 = 12 + m + month
+        y-=1
+    else:
+        date = a.day.__str__().rjust(2)
+        rday = ('\\b' + date + '\\b').replace('\\b ', '\\s')
+        rdayc = "\033[7m" + date + "\033[0m"
+        thism = calendar.month(y-1, 12)
+        print(re.sub(rday, rdayc, thism))
+        exit()
+
+    date = a.day.__str__().rjust(2)
+    rday = ('\\b' + date + '\\b').replace('\\b ', '\\s')
+    rdayc = "\033[7m" + date + "\033[0m"
+    thism = calendar.month(y, m1)
+    print(re.sub(rday, rdayc, thism))
+else:
+    print('If you need help regarding student credential, simple type help')
+    h = input('Enter help:')
+    if h.lower()=='help':
+        print('Help: This application should be run with the following',end=' ')
+        print('command line parameters: a positive integer, a negative integer or zero.',end=' ')
+        print('The positive integer cannot be more than 12 or less than -12.')
+        print(f'username is: {u1}')
+        print(f'password is: {p1}')
